@@ -303,7 +303,7 @@ footer .credit a:hover{color:var(--accent-dark)}
     <div class="nav-links">
       <a href="#worlds" class="nav-link">Worlds</a>
       <a href="#pricing" class="nav-link">Pricing</a>
-      <a href="https://app.cozydesk.app" class="btn-ghost" target="_blank" rel="noopener" id="navCta">Open CozyDesk</a>
+      <a href="https://app.cozydesk.app" class="btn-primary" target="_blank" rel="noopener">Open CozyDesk</a>
     </div>
   </div>
 </header>
@@ -313,12 +313,12 @@ footer .credit a:hover{color:var(--accent-dark)}
   <h1>An immersive desk world for focus and relaxation.</h1>
   <p class="hero-sub">CozyDesk is a desktop-only app that makes work feel calm, cozy, and fun. Build your own immersive desk with stickers, themes, and a Pomodoro timer designed for deep focus.</p>
   <div class="hero-cta-row">
-    <a href="https://app.cozydesk.app" class="btn-primary btn-hero" target="_blank" rel="noopener" id="heroInstall" style="display:none">Add CozyDesk to Your Dock</a>
-    <a href="https://app.cozydesk.app" class="btn-primary btn-hero" target="_blank" rel="noopener" id="heroOpen">Open CozyDesk in Your Browser</a>
+    <a href="https://app.cozydesk.app" class="btn-primary btn-hero" target="_blank" rel="noopener">Open CozyDesk</a>
   </div>
   <div class="hero-no-download">
-    <p id="downloadLine">No downloads. No setup. Just open it in your browser.</p>
-    <p class="hero-no-download-sub" id="installHint">Runs in your browser. Desktop Mac / PC only.</p>
+    <p>Runs in your browser — no downloads, no setup.</p>
+    <p class="hero-no-download-sub">To add CozyDesk to your dock or taskbar, see the instructions inside the app.</p>
+    <p class="hero-no-download-sub">Desktop Mac / PC only.</p>
   </div>
   <div class="hero-media">
     <!-- Andrew: swap this for a looping video clip of a live desk whenever you have one -->
@@ -404,14 +404,13 @@ footer .credit a:hover{color:var(--accent-dark)}
     <h2>People are actually enjoying work again.</h2>
   </div>
   <div class="testi-grid">
-    <!-- Andrew: replace these with real tester quotes + names when you have them -->
     <div class="testi-card">
-      <div class="testi-quote">This makes focusing so much fun!</div>
-      <div class="testi-who">Sarah H. <span>· Student</span></div>
+      <div class="testi-quote">It's so cute and it's a perfect way to start my working day!</div>
+      <div class="testi-who">Shirley L. <span>· Content Creator</span></div>
     </div>
     <div class="testi-card">
-      <div class="testi-quote">I actually look forward to working now.</div>
-      <div class="testi-who">Dave L. <span>· Freelancer</span></div>
+      <div class="testi-quote">I love the lo-fi music in the background. The app definitely feels cozy!</div>
+      <div class="testi-who">Bruce G. <span>· Product Reviewer</span></div>
     </div>
   </div>
 </section>
@@ -439,8 +438,7 @@ footer .credit a:hover{color:var(--accent-dark)}
 <section class="cta-band">
   <h2>Ready to build your cozy desk?</h2>
   <div class="hero-cta-row">
-    <a href="https://app.cozydesk.app" class="btn-primary btn-hero" target="_blank" rel="noopener" id="bottomInstall" style="display:none">Add CozyDesk to Your Dock</a>
-    <a href="https://app.cozydesk.app" class="btn-primary btn-hero" target="_blank" rel="noopener" id="bottomOpen">Open CozyDesk in Your Browser</a>
+    <a href="https://app.cozydesk.app" class="btn-primary btn-hero" target="_blank" rel="noopener">Open CozyDesk</a>
   </div>
 </section>
 
@@ -455,85 +453,5 @@ footer .credit a:hover{color:var(--accent-dark)}
   </div>
   <div class="footer-contact">Questions or comments? <a href="mailto:cozydesksupport@gmail.com">cozydesksupport@gmail.com</a></div>
 </footer>
-
-<script>
-(function(){
-  try{
-    var ua=navigator.userAgent||'';
-    var isFirefox=/Firefox/.test(ua);
-    var isEdge=/Edg\//.test(ua);
-    var isChrome=/Chrome/.test(ua)&&!isEdge&&!/OPR\//.test(ua);
-    var isSafari=/Safari/.test(ua)&&!/Chrome/.test(ua)&&!/Chromium/.test(ua)&&!isEdge;
-
-    // Mac says "Dock", Windows says "Taskbar", anything else says "Desktop".
-    var isMac=/Mac/.test(navigator.platform||'')|| /Mac OS X/.test(ua);
-    var isWin=/Win/.test(navigator.platform||'')|| /Windows/.test(ua);
-    var place=isMac?'Dock':(isWin?'Taskbar':'Desktop');
-
-    var hint=document.getElementById('installHint');
-    var downloadLine=document.getElementById('downloadLine');
-    var navCta=document.getElementById('navCta');
-    var installBtns=[document.getElementById('heroInstall'),document.getElementById('bottomInstall')];
-    var openBtns=[document.getElementById('heroOpen'),document.getElementById('bottomOpen')];
-
-    function show(el){ if(el) el.style.display=''; }
-    function hide(el){ if(el) el.style.display='none'; }
-    function setInstallLabel(label){ installBtns.forEach(function(el){ if(el) el.textContent=label; }); }
-    function makeHoney(el){ if(!el) return; el.classList.remove('btn-ghost'); el.classList.add('btn-primary'); }
-    function makeGhost(el){ if(!el) return; el.classList.remove('btn-primary'); el.classList.add('btn-ghost'); }
-
-    var canInstall = isChrome || isEdge; // only these truly one-click install a PWA
-
-    if(canInstall){
-      // Chrome/Edge: "Add to Dock" is the special honey action; every "open in
-      // browser" button (nav + hero secondary) is ghost so matching actions match.
-      setInstallLabel('Add CozyDesk to Your '+place);
-      installBtns.forEach(show);
-      openBtns.forEach(makeGhost);
-      makeGhost(navCta);
-      if(downloadLine) downloadLine.textContent='No downloads. No setup. Add it to your '+place+', or just open it in your browser.';
-      if(hint) hint.textContent='Opens like an app — no install, no download.';
-    }else if(isSafari){
-      // Safari: only one action (open in browser) — so nav + hero are both honey.
-      installBtns.forEach(hide);
-      makeHoney(navCta);
-      if(downloadLine) downloadLine.textContent='No downloads. No setup. Just open it in your browser.';
-      if(hint) hint.textContent='Want an app icon? File → Add to '+place+'.';
-    }else if(isFirefox){
-      installBtns.forEach(hide);
-      makeHoney(navCta);
-      if(downloadLine) downloadLine.textContent='No downloads. No setup. Just open it in your browser.';
-      if(hint) hint.textContent="Firefox can't install apps — but CozyDesk runs great right in your browser.";
-    }else{
-      installBtns.forEach(hide);
-      makeHoney(navCta);
-      if(downloadLine) downloadLine.textContent='No downloads. No setup. Just open it in your browser.';
-      if(hint) hint.textContent='Runs in your browser. Desktop Mac / PC only.';
-    }
-
-    // Real one-click install: capture the browser's install prompt and fire it on click.
-    var deferredPrompt=null;
-    window.addEventListener('beforeinstallprompt',function(e){
-      e.preventDefault();
-      deferredPrompt=e;
-    });
-    installBtns.forEach(function(btn){
-      if(!btn) return;
-      btn.addEventListener('click',function(ev){
-        if(deferredPrompt){
-          ev.preventDefault();
-          deferredPrompt.prompt();
-          deferredPrompt.userChoice.finally(function(){ deferredPrompt=null; });
-        }
-        // If no prompt is available, the link falls through and just opens the app.
-      });
-    });
-    // If the app gets installed, swap the hint to a friendly confirmation.
-    window.addEventListener('appinstalled',function(){
-      if(hint) hint.textContent="CozyDesk is on your "+place+" — open it anytime.";
-    });
-  }catch(e){}
-})();
-</script>
 </body>
 </html>
